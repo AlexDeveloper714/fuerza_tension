@@ -16,7 +16,7 @@ var x = posXcir, y = posYcir, difX = 0, difY = 0;
 //var calculos
 var angulo, masa1, masa2;
 var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
-
+var seno, coseno, radian;
 $(function () {
     //Inicializar Sliders :D
     $document = $(document);
@@ -27,58 +27,16 @@ $(function () {
     });
     //Actualiza valor OUTPUT
     function valueOutput() {
-        $("#angulo_num").empty();
-        $("#masa1_num").empty();
-        $("#masa2_num").empty();
-        $("#friccion_num").empty();
-        value = $("#angulo").val();
-        value2 = $("#masa1").val();
-        value3 = $("#masa2").val();
-        value4 = $("#friccion").val();
-        $valor1 = $("<h4>" + value + "</h4>");
-        $valor2 = $("<h4>" + value2 + "</h4>");
-        $valor3 = $("<h4>" + value3 + "</h4>");
-        $valor4 = $("<h4>" + value4 + "</h4>");
-        $("#angulo_num").append($valor1);
-        $("#masa1_num").append($valor2);
-        $("#masa2_num").append($valor3)
-        $("#friccion_num").append($valor4)
-        // module aliases
-        $("#cosas").empty();
-        Engine =
-                Matter.Engine,
-                Render = Matter.Render,
-                Runner = Matter.Runner,
-                Events = Matter.Events,
-                Body = Matter.Body,
-                Composite = Matter.Composite,
-                Composites = Matter.Composites,
-                Constraint = Matter.Constraint,
-                MouseConstraint = Matter.MouseConstraint,
-                Mouse = Matter.Mouse,
-                World = Matter.World,
-                Bodies = Matter.Bodies,
-                Vertices = Matter.Vertices;
-        // create an engine
-        engine = Engine.create();
-        // create a renderer
-        render = Render.create({
-            element: document.getElementById("cosas"),
-            engine: engine,
-            options: {
-                width: Math.min(document.documentElement.clientWidth, 480),
-                height: Math.min(document.documentElement.clientHeight, 350),
-                background: 'img/wall-bg.jpg',
-                showAngleIndicator: false,
-                wireframes: true
-            }
-        });
+        vaciarDatos();
         angulo = parseInt($("#angulo").val());
         masa1 = parseInt($("#masa1").val());
         masa2 = parseInt($("#masa2").val());
+        crearWorld();
+
         var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
-        var radian = (angulo * Math.PI) / 180;
-        var seno = Math.sin(radian), coseno = Math.cos(radian);
+        radian = (angulo * Math.PI) / 180;
+        seno = Math.sin(radian);
+        coseno = Math.cos(radian);
         w1 = masa1 * gra;
         w2 = masa2 * gra;
         tX = w2 * Math.sin(radian);
@@ -298,6 +256,56 @@ $(function () {
 //            y: 300
 //        });
 //    });
+    }
+    function vaciarDatos() {
+        $("#angulo_num").empty();
+        $("#masa1_num").empty();
+        $("#masa2_num").empty();
+        $("#friccion_num").empty();
+        value = $("#angulo").val();
+        value2 = $("#masa1").val();
+        value3 = $("#masa2").val();
+        value4 = $("#friccion").val();
+        $valor1 = $("<h4>" + value + "</h4>");
+        $valor2 = $("<h4>" + value2 + "</h4>");
+        $valor3 = $("<h4>" + value3 + "</h4>");
+        $valor4 = $("<h4>" + value4 + "</h4>");
+        $("#angulo_num").append($valor1);
+        $("#masa1_num").append($valor2);
+        $("#masa2_num").append($valor3)
+        $("#friccion_num").append($valor4)
+        // module aliases
+        $("#cosas").empty();
+    }
+    function crearWorld(angulo) {
+        Engine =
+                Matter.Engine,
+                Render = Matter.Render,
+                Runner = Matter.Runner,
+                Events = Matter.Events,
+                Body = Matter.Body,
+                Composite = Matter.Composite,
+                Composites = Matter.Composites,
+                Constraint = Matter.Constraint,
+                MouseConstraint = Matter.MouseConstraint,
+                Mouse = Matter.Mouse,
+                World = Matter.World,
+                Bodies = Matter.Bodies,
+                Vertices = Matter.Vertices;
+        // create an engine
+        engine = Engine.create();
+        // create a renderer
+        render = Render.create({
+            element: document.getElementById("cosas"),
+            engine: engine,
+            options: {
+                width: Math.min(document.documentElement.clientWidth, 480),
+                height: Math.min(document.documentElement.clientHeight, 350),
+                background: 'img/wall-bg.jpg',
+                showAngleIndicator: false,
+                wireframes: false
+            }
+        });
     }
     // Valor inicial de los sliders OJO
     valueOutput();
