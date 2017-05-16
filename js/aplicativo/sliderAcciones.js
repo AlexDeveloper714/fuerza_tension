@@ -1,8 +1,11 @@
 //var Jquery
-var $document,selector,$inputRange;
+var $document, selector, $inputRange;
+var value, value2, value3, value4;
+var $valor1, $valor2, $valor3, $valor4;
 //var Matter.js
-
+var Engine, engine, render;
 //var calculos
+var angulo,masa1,masa2;
 $(function () {
     //Inicializar Sliders :D
     $document = $(document);
@@ -17,8 +20,6 @@ $(function () {
         $("#masa1_num").empty();
         $("#masa2_num").empty();
         $("#friccion_num").empty();
-        var value, value2, value3, value4;
-        var $valor1, $valor2, $valor3, $valor4;
         value = $("#angulo").val();
         value2 = $("#masa1").val();
         value3 = $("#masa2").val();
@@ -33,7 +34,7 @@ $(function () {
         $("#friccion_num").append($valor4)
         // module aliases
         $("#cosas").empty();
-        var Engine =
+        Engine =
                 Matter.Engine,
                 Render = Matter.Render,
                 Runner = Matter.Runner,
@@ -48,9 +49,9 @@ $(function () {
                 Bodies = Matter.Bodies,
                 Vertices = Matter.Vertices;
         // create an engine
-        var engine = Engine.create();
+        engine = Engine.create();
         // create a renderer
-        var render = Render.create({
+        render = Render.create({
             element: document.getElementById("cosas"),
             engine: engine,
             options: {
@@ -61,7 +62,9 @@ $(function () {
                 wireframes: false
             }
         });
-        var angulo = parseInt($("#angulo").val()), masa1 = parseInt($("#masa1").val()), masa2 = parseInt($("#masa2").val());
+        angulo = parseInt($("#angulo").val()); 
+        masa1 = parseInt($("#masa1").val());
+        masa2 = parseInt($("#masa2").val());
         var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
         var radian = (angulo * Math.PI) / 180;
         var arrow, triangulo, circle, circle_2, polea, group, cadena, cadena;
