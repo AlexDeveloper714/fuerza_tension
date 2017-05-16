@@ -2,10 +2,20 @@
 var $document, selector, $inputRange;
 var value, value2, value3, value4;
 var $valor1, $valor2, $valor3, $valor4;
+var $tabla2, $tabla, $tabla3;
 //var Matter.js
 var Engine, engine, render;
+var arrow, triangulo, circle, circle_2, polea, group, cadena, cadena;
+var defaultCategory = 0x0001,
+        redCategory = 0x0002,
+        greenCategory = 0x0004,
+        blueCategory = 0x0008;
+var posXcir = 200, posYcir = 200, posXtria = 260, posYtria = 250, posXcadena = -80, posYcadena = 170;
+var x = posXcir, y = posYcir, difX = 0, difY = 0;
 //var calculos
-var angulo,masa1,masa2;
+var angulo, masa1, masa2;
+var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
+
 $(function () {
     //Inicializar Sliders :D
     $document = $(document);
@@ -62,21 +72,12 @@ $(function () {
                 wireframes: false
             }
         });
-        angulo = parseInt($("#angulo").val()); 
+        angulo = parseInt($("#angulo").val());
         masa1 = parseInt($("#masa1").val());
         masa2 = parseInt($("#masa2").val());
         var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
         var radian = (angulo * Math.PI) / 180;
-        var arrow, triangulo, circle, circle_2, polea, group, cadena, cadena;
-        var seno = Math.sin(radian);
-        var coseno = Math.cos(radian);
-        var posXcir = 200, posYcir = 200, posXtria = 260, posYtria = 250, posXcadena = -80, posYcadena = 170;
-        var x = posXcir, y = posYcir, difX = 0, difY = 0;
-        var $error, $tabla2, $tabla, $tabla3;
-        var defaultCategory = 0x0001,
-                redCategory = 0x0002,
-                greenCategory = 0x0004,
-                blueCategory = 0x0008;
+        var seno = Math.sin(radian), coseno = Math.cos(radian);
         w1 = masa1 * gra;
         w2 = masa2 * gra;
         tX = w2 * Math.sin(radian);
