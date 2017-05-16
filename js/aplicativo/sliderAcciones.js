@@ -3,6 +3,7 @@ var $document, selector, $inputRange;
 var value, value2, value3, value4;
 var $valor1, $valor2, $valor3, $valor4;
 var $tabla2, $tabla, $tabla3;
+
 //var Matter.js
 var Engine, engine, render;
 var arrow, triangulo, circle, circle_2, polea, group, cadena, cadena;
@@ -69,7 +70,7 @@ $(function () {
                 height: Math.min(document.documentElement.clientHeight, 350),
                 background: 'img/wall-bg.jpg',
                 showAngleIndicator: false,
-                wireframes: false
+                wireframes: true
             }
         });
         angulo = parseInt($("#angulo").val());
@@ -215,11 +216,11 @@ $(function () {
                         difY = (45 / (angulo) * 0.7) * (200 - a);
                     }
                     triangulo = Bodies.fromVertices(posXtria, posYtria - difY, arrow, {isStatic: true, friction: 0.01});
-                    circle = Bodies.circle(posXcir, posYcir - 70, 20, {render: {
+                    circle = Bodies.circle(posXcir, posYcir - 70, 17, {render: {
                             fillStyle: 'transparent',
                             strokeStyle: 'transparent'
                         }, isStatic: true, friction: 0.01});
-                    circle_2 = Bodies.circle(posXcir, posYcir - 140, 20, {render: {
+                    circle_2 = Bodies.circle(posXcir, posYcir - 140, 17, {render: {
                             fillStyle: 'transparent',
                             strokeStyle: 'transparent'
                         }, isStatic: true, friction: 0.01});
@@ -249,7 +250,7 @@ $(function () {
                 }
                 break;
         }
-        cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 0.8, length: 5});
+        cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 1, length: 5});
         c = ((a ** 2) + (b ** 2)) ** (1 / 2);
         $("#datos").empty();
         $("#tabla1").find("tbody").empty();
@@ -303,6 +304,7 @@ $(function () {
     //  Actualizar valor Sliders OJO
     $document.on('input', selector, function () {
         valueOutput();
+//        Engine.clear(engine);
     });
 //    //  Example functionality to demonstrate programmatic value changes 
 //    $document.on('click', '#js-example-change-value button', function (e) {
