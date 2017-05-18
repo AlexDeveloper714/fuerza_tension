@@ -27,6 +27,7 @@ function valueOutput() {
     //Menor o igual a 45 -> cambiar  A (x,y) aumentar Y , Mayor a 45 -> cambiar  B (x,y)
     //angulo=tan(a/b) -> arctan(angulo)= a / b -> arctan(angulo) * b = a
     ////corregir dinamismo y ver si se puede lo del peso
+    var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0.01, peso2 = 0.01;
 
     group = Body.nextGroup(true);
     cadena = Composites.stack(posXcadena + 90, posYcadena - 90, 8, 1, 10, 10, function (x, y, columns, rows) {
