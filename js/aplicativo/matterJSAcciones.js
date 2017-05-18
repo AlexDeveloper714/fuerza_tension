@@ -16,16 +16,12 @@ var posXcir = 200, posYcir = 200, posXtria = 260, posYtria = 250, posXcadena = -
 var x = posXcir, y = posYcir, difX = 0, difY = 0;
 //var calculos
 var angulo, masa1, masa2;
-var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
+var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0.01, peso2 = 0.01;
 var seno, coseno, radian;
 //Actualiza valor OUTPUT
 function valueOutput() {
     vaciarDatos();
-    angulo = parseInt($("#angulo").val());
-    masa1 = parseInt($("#masa1").val());
-    masa2 = parseInt($("#masa2").val());
     crearWorld();
-    var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0.01, peso2 = 0.01;
     hacerCalculos();
     //Vertices.fromPath(1-A,2,3-B);
     //Menor o igual a 45 -> cambiar  A (x,y) aumentar Y , Mayor a 45 -> cambiar  B (x,y)
@@ -188,39 +184,7 @@ function valueOutput() {
         collisionFilter: {mask: defaultCategory | greenCategory, group: group},
         isStatic: true, friction: 0.01});
     cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 1, length: 5});
-    c = ((a ** 2) + (b ** 2)) ** (1 / 2);
-    $("#datos").empty();
-    $("#tabla1").find("tbody").empty();
-    $("#tabla2").find("tbody").empty();
-    $("#tabla3").find("tbody").empty();
-    // add all of the bodies to the world
-    if (angulo == 0) {
-        World.add(engine.world, [triangulo, cadena, circle, flechas]);
-    } else {
-        World.add(engine.world, [triangulo, cadena, circle, circle_2, polea, flechas]);
-    }
-//            // run the engine
-    Engine.run(engine);
-//            // run the renderer
-    Render.run(render);
-    $tabla = $("<tr>\n\
-                    <td>" + w1.toFixed(2) + "  N</td>\n\
-                    <td>" + w2.toFixed(2) + "  N</td>\n\
-                    <td>" + tTotal.toFixed(2) + " N</td></tr>");
-    $tabla2 = $("<tr>\n\
-                    <td>" + tX.toFixed(2) + " N</td>\n\
-                    <td>" + tY.toFixed(2) + " N</td></tr>");
-    if (angulo < 45) {
-        a = (a - 200) * -1;
-    }
-    $tabla3 = $("<tr>\n\
-                    <td>" + a.toFixed(2) + "</td>\n\
-                    <td>" + b.toFixed(2) + "</td>\n\
-                    <td>" + c.toFixed(2) + "</td>\n\
-                    </tr>");
-    $("#tabla1").find("tbody").append($tabla);
-    $("#tabla2").find("tbody").append($tabla2);
-    $("#tabla3").find("tbody").append($tabla3);
+    dibujarWorld();
     //  Events.on(engine, 'afterUpdate', function(event) {
 //        var time = engine.timing.timestamp;
 //
@@ -255,6 +219,9 @@ function vaciarDatos() {
     $("#friccion_num").append($valor4)
     // module aliases
     $("#cosas").empty();
+    angulo = parseInt($("#angulo").val());
+    masa1 = parseInt($("#masa1").val());
+    masa2 = parseInt($("#masa2").val());
 }
 function crearWorld() {
     Engine = Matter.Engine,
@@ -306,4 +273,40 @@ function hacerCalculos() {
         peso1 = 0.001;
         peso2 = 0.001;
     }
+}
+function dibujarWorld() {
+
+    c = ((a ** 2) + (b ** 2)) ** (1 / 2);
+    $("#datos").empty();
+    $("#tabla1").find("tbody").empty();
+    $("#tabla2").find("tbody").empty();
+    $("#tabla3").find("tbody").empty();
+    // add all of the bodies to the world
+    if (angulo == 0) {
+        World.add(engine.world, [triangulo, cadena, circle, flechas]);
+    } else {
+        World.add(engine.world, [triangulo, cadena, circle, circle_2, polea, flechas]);
+    }
+//            // run the engine
+    Engine.run(engine);
+//            // run the renderer
+    Render.run(render);
+    $tabla = $("<tr>\n\
+                    <td>" + w1.toFixed(2) + "  N</td>\n\
+                    <td>" + w2.toFixed(2) + "  N</td>\n\
+                    <td>" + tTotal.toFixed(2) + " N</td></tr>");
+    $tabla2 = $("<tr>\n\
+                    <td>" + tX.toFixed(2) + " N</td>\n\
+                    <td>" + tY.toFixed(2) + " N</td></tr>");
+    if (angulo < 45) {
+        a = (a - 200) * -1;
+    }
+    $tabla3 = $("<tr>\n\
+                    <td>" + a.toFixed(2) + "</td>\n\
+                    <td>" + b.toFixed(2) + "</td>\n\
+                    <td>" + c.toFixed(2) + "</td>\n\
+                    </tr>");
+    $("#tabla1").find("tbody").append($tabla);
+    $("#tabla2").find("tbody").append($tabla2);
+    $("#tabla3").find("tbody").append($tabla3);
 }
