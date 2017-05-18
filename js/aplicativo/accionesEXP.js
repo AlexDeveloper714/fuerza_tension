@@ -89,118 +89,16 @@ function valueOutput() {
                 texture: 'img/polea.png'
             }
         }, isStatic: true, friction: 0.01});
-
-    switch (angulo) {
-        case 0:
-            verticesFi = Vertices.fromPath('0 0 0 50 500 50 500 0');
-            triangulo = Bodies.fromVertices(posXtria, posYtria, verticesFi, {isStatic: true, friction: 0.01});
-            circle = Bodies.circle(posXcir, posYcir - 17, 20, {render: {
-                    strokeStyle: '#ffffff',
-                    sprite: {
-                        texture: 'img/polea.png'
-                    }
-                }, isStatic: true, friction: 0.01});
-            cadena = Composites.stack(posXcadena + 90, posYcadena + 10, 8, 1, 10, 10, function (x, y, columns, rows) {
-                if (columns == 0 && rows == 0) {
-                    return Bodies.rectangle(x, y, 50, 50, {collisionFilter: {group: group},
-                        render: {
-                            strokeStyle: '#ffffff',
-                            sprite: {
-                                texture: 'img/box.png'
-                            }
-                        }, density: peso1});
-                } else if (columns == 7 && rows == 0) {
-                    return Bodies.rectangle(x, y, 50, 50, {collisionFilter: {group: group},
-                        render: {
-                            strokeStyle: '#ffffff',
-                            sprite: {
-                                texture: 'img/box.png'
-                            }
-                        }, density: peso2
-                    });
-                } else {
-                    return Bodies.rectangle(x, y, 50, 20, {collisionFilter: {group: group}
-                        , render: {
-                            strokeStyle: '#ffffff',
-                            sprite: {
-                                texture: 'img/chain.png'
-                            }
-                        }});
-                }
-            });
-            break;
-        case 45:
-            verticesFi = Vertices.fromPath('0 0 0 200 200 200');
-            triangulo = Bodies.fromVertices(posXtria, posYtria, verticesFi, {isStatic: true, friction: 0.01});
-            circle = Bodies.circle(posXcir, posYcir - 70, 20, {render: {
-                    fillStyle: 'transparent',
-                    strokeStyle: 'transparent'
-                }, isStatic: true, friction: 0.01});
-            circle_2 = Bodies.circle(posXcir, posYcir - (2 * 70), 20, {render: {
-                    fillStyle: 'transparent',
-                    strokeStyle: 'transparent'
-                }, isStatic: true, friction: 0.01});
-            break;
-        case 90:
-            verticesFi = Vertices.fromPath('0 0 0 190 190 190 190 0');
-            triangulo = Bodies.fromVertices(posXtria + 20, posYtria - 10, verticesFi, {isStatic: true, friction: 0.01});
-            circle = Bodies.circle(posXcir, posYcir - 70, 20, {render: {
-                    fillStyle: 'transparent',
-                    strokeStyle: 'transparent'
-                }, isStatic: true, friction: 0.01});
-            circle_2 = Bodies.circle(posXcir, posYcir - 140, 20, {render: {
-                    fillStyle: 'transparent',
-                    strokeStyle: 'transparent'
-                }, isStatic: true, friction: 0.1});
-            break;
-        default:
-            if (angulo > 0 && angulo < 45) {
-                a = 200 - (Math.atan(radian) * b);
-                verticesFi = Vertices.fromPath('0 ' + a + ' 0 200 200 200');
-                if (angulo > 30) {
-                    difY = (45 / (4 * angulo)) * (200 - a);
-                }
-                if (angulo >= 10 && angulo <= 30) {
-                    difY = (45 / (2 * angulo)) * (200 - a);
-                }
-                if (angulo <= 9) {
-                    difY = (45 / (angulo) * 0.7) * (200 - a);
-                }
-                triangulo = Bodies.fromVertices(posXtria, posYtria - difY, verticesFi, {isStatic: true, friction: 0.01});
-                circle = Bodies.circle(posXcir, posYcir - 70, 17, {render: {
-                        fillStyle: 'transparent',
-                        strokeStyle: 'transparent'
-                    }, isStatic: true, friction: 0.01});
-                circle_2 = Bodies.circle(posXcir, posYcir - 140, 17, {render: {
-                        fillStyle: 'transparent',
-                        strokeStyle: 'transparent'
-                    }, isStatic: true, friction: 0.01});
-                break;
-            } else if (angulo > 45 && angulo < 90) {
-                b = (a / Math.atan(radian)) - 200;
-                verticesFi = Vertices.fromPath('0 0 0 200 ' + b + ' 200');
-                difX = posXtria - b;
-                if (angulo >= 46 && angulo <= 60) {
-                    difX = (90 / (6 * angulo)) * (200 - b);
-                }
-                if (angulo >= 61 && angulo <= 80) {
-                    difX = (90 / (4.3 * angulo)) * (200 - b);
-                }
-                if (angulo >= 81) {
-                    difX = (90 / (3.5 * angulo)) * (200 - b);
-                }
-                triangulo = Bodies.fromVertices(posXtria - difX, posYtria, verticesFi, {isStatic: true, friction: 0.01});
-                circle = Bodies.circle(posXcir, posYcir - 70, 17, {render: {
-                        fillStyle: 'transparent',
-                        strokeStyle: 'transparent'
-                    }, isStatic: true, friction: 0.01});
-                circle_2 = Bodies.circle(posXcir, posYcir - 140, 17, {render: {
-                        fillStyle: 'transparent',
-                        strokeStyle: 'transparent'
-                    }, isStatic: true, friction: 0.01});
-            }
-            break;
-    }
+    verticesFi = Vertices.fromPath('0 0 0 200 200 200');
+    triangulo = Bodies.fromVertices(posXtria, posYtria, verticesFi, {isStatic: true, friction: 0.01});
+    circle = Bodies.circle(posXcir, posYcir - 70, 20, {render: {
+            fillStyle: 'transparent',
+            strokeStyle: 'transparent'
+        }, isStatic: true, friction: 0.01});
+    circle_2 = Bodies.circle(posXcir, posYcir - (2 * 70), 20, {render: {
+            fillStyle: 'transparent',
+            strokeStyle: 'transparent'
+        }, isStatic: true, friction: 0.01});
     verticesFl = Vertices.fromPath('40 40 40 80 80 80 80 40 80 20 80 100 100 60');
     flechas = Bodies.fromVertices(250, 250, verticesFl, {isStatic: true, friction: 0.01});
     cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 1, length: 5});
@@ -210,11 +108,7 @@ function valueOutput() {
     $("#tabla2").find("tbody").empty();
     $("#tabla3").find("tbody").empty();
     // add all of the bodies to the world
-    if (angulo == 0) {
-        World.add(engine.world, [triangulo, cadena, circle, flechas]);
-    } else {
-        World.add(engine.world, [triangulo, cadena, circle, circle_2, polea, flechas]);
-    }
+    World.add(engine.world, [triangulo, cadena, circle, circle_2, polea, flechas]);
 //            // run the engine
     Engine.run(engine);
 //            // run the renderer
