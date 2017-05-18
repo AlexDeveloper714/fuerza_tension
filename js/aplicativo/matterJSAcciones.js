@@ -38,7 +38,8 @@ function valueOutput() {
     if (masa1 > masa2) {
         peso1 = 0.01;
         peso2 = 0.001;
-    } else {
+    }
+    if (masa1 < masa2) {
         peso1 = 0.001;
         peso2 = 0.01;
     }
