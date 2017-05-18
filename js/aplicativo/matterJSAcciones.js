@@ -25,16 +25,12 @@ function valueOutput() {
     masa1 = parseInt($("#masa1").val());
     masa2 = parseInt($("#masa2").val());
     crearWorld();
-
     var a = 200, b = 200, c = 0, tTotal = 0, tX = 0, tY = 0, w1 = 0, w2 = 0, gra = 9.8, peso1 = 0, peso2 = 0;
-    radian = (angulo * Math.PI) / 180;
-    seno = Math.sin(radian);
-    coseno = Math.cos(radian);
-    w1 = masa1 * gra;
-    w2 = masa2 * gra;
-    tX = w2 * Math.sin(radian);
-    tY = w1;
-    tTotal = ((tX ** 2) + (tY ** 2)) ** (1 / 2);
+    hacerCalculos();
+    //Vertices.fromPath(1-A,2,3-B);
+    //Menor o igual a 45 -> cambiar  A (x,y) aumentar Y , Mayor a 45 -> cambiar  B (x,y)
+    //angulo=tan(a/b) -> arctan(angulo)= a / b -> arctan(angulo) * b = a
+    ////corregir dinamismo y ver si se puede lo del peso
     if (masa1 > masa2) {
         peso1 = 0.01;
         peso2 = 0.001;
@@ -47,10 +43,6 @@ function valueOutput() {
         peso1 = 0.001;
         peso2 = 0.001;
     }
-    //Vertices.fromPath(1-A,2,3-B);
-    //Menor o igual a 45 -> cambiar  A (x,y) aumentar Y , Mayor a 45 -> cambiar  B (x,y)
-    //angulo=tan(a/b) -> arctan(angulo)= a / b -> arctan(angulo) * b = a
-    ////corregir dinamismo y ver si se puede lo del peso
     group = Body.nextGroup(true);
     cadena = Composites.stack(posXcadena + 90, posYcadena - 90, 8, 1, 10, 10, function (x, y, columns, rows) {
         if (columns == 0 && rows == 0) {
@@ -303,4 +295,14 @@ function crearWorld() {
             wireframes: false
         }
     });
+}
+function hacerCalculos() {
+    radian = (angulo * Math.PI) / 180;
+    seno = Math.sin(radian);
+    coseno = Math.cos(radian);
+    w1 = masa1 * gra;
+    w2 = masa2 * gra;
+    tX = w2 * Math.sin(radian);
+    tY = w1;
+    tTotal = ((tX ** 2) + (tY ** 2)) ** (1 / 2);
 }
