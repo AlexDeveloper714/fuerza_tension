@@ -275,7 +275,7 @@ function vaciarDatos() {
     // module aliases
     $("#cosas").empty();
 }
-function crearWorld(angulo) {
+function crearWorld() {
     Engine = Matter.Engine,
             Render = Matter.Render,
             Runner = Matter.Runner,
