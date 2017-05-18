@@ -23,12 +23,67 @@ function valueOutput() {
     vaciarDatos();
     crearWorld();
     hacerCalculos();
+    ponerObjetos();
+    dibujarWorld();
+}
+function vaciarDatos() {
+    $("#angulo_num").empty();
+    $("#masa1_num").empty();
+    $("#masa2_num").empty();
+    $("#friccion_num").empty();
+    value = $("#angulo").val();
+    value2 = $("#masa1").val();
+    value3 = $("#masa2").val();
+    value4 = $("#friccion").val();
+    $valor1 = $("<h4>" + value + "</h4>");
+    $valor2 = $("<h4>" + value2 + "</h4>");
+    $valor3 = $("<h4>" + value3 + "</h4>");
+    $valor4 = $("<h4>" + value4 + "</h4>");
+    $("#angulo_num").append($valor1);
+    $("#masa1_num").append($valor2);
+    $("#masa2_num").append($valor3)
+    $("#friccion_num").append($valor4)
+    // module aliases
+    $("#cosas").empty();
+    angulo = parseInt($("#angulo").val());
+    masa1 = parseInt($("#masa1").val());
+    masa2 = parseInt($("#masa2").val());
+}
+function crearWorld() {
+    Engine = Matter.Engine,
+            Render = Matter.Render,
+            Runner = Matter.Runner,
+            Events = Matter.Events,
+            Body = Matter.Body,
+            Composite = Matter.Composite,
+            Composites = Matter.Composites,
+            Constraint = Matter.Constraint,
+            MouseConstraint = Matter.MouseConstraint,
+            Mouse = Matter.Mouse,
+            World = Matter.World,
+            Bodies = Matter.Bodies,
+            Vertices = Matter.Vertices;
+    // create an engine
+    engine = Engine.create();
+    // create a renderer
+    render = Render.create({
+        element: document.getElementById("cosas"),
+        engine: engine,
+        options: {
+            width: Math.min(document.documentElement.clientWidth, 480),
+            height: Math.min(document.documentElement.clientHeight, 350),
+            background: 'img/wall-bg.jpg',
+            showAngleIndicator: false,
+            wireframes: false
+        }
+    });
+}
+function ponerObjetos() {
     //Vertices.fromPath(1-A,2,3-B);
     //Menor o igual a 45 -> cambiar  A (x,y) aumentar Y , Mayor a 45 -> cambiar  B (x,y)
     //angulo=tan(a/b) -> arctan(angulo)= a / b -> arctan(angulo) * b = a
     ////corregir dinamismo y ver si se puede lo del peso
     var a = 200, b = 200, c = 0, peso1 = 0.01, peso2 = 0.01;
-
     group = Body.nextGroup(true);
     cadena = Composites.stack(posXcadena + 90, posYcadena - 90, 8, 1, 10, 10, function (x, y, columns, rows) {
         if (columns == 0 && rows == 0) {
@@ -185,73 +240,6 @@ function valueOutput() {
         collisionFilter: {mask: defaultCategory | greenCategory, group: group},
         isStatic: true, friction: 0.01});
     cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 1, length: 5});
-    dibujarWorld();
-    //  Events.on(engine, 'afterUpdate', function(event) {
-//        var time = engine.timing.timestamp;
-//
-//        Composite.translate(cadena, {
-//            x: Math.sin(time * 0.001) * 2,
-//            y: Math.sin(time * 0.001) * 2
-//        });
-//        var scale = 1 + (Math.sin(time * 0.001) * 0.01);
-//
-//        Composite.scale(stack, scale, scale, {
-//            x: 300,
-//            y: 300
-//        });
-//    });
-}
-function vaciarDatos() {
-    $("#angulo_num").empty();
-    $("#masa1_num").empty();
-    $("#masa2_num").empty();
-    $("#friccion_num").empty();
-    value = $("#angulo").val();
-    value2 = $("#masa1").val();
-    value3 = $("#masa2").val();
-    value4 = $("#friccion").val();
-    $valor1 = $("<h4>" + value + "</h4>");
-    $valor2 = $("<h4>" + value2 + "</h4>");
-    $valor3 = $("<h4>" + value3 + "</h4>");
-    $valor4 = $("<h4>" + value4 + "</h4>");
-    $("#angulo_num").append($valor1);
-    $("#masa1_num").append($valor2);
-    $("#masa2_num").append($valor3)
-    $("#friccion_num").append($valor4)
-    // module aliases
-    $("#cosas").empty();
-    angulo = parseInt($("#angulo").val());
-    masa1 = parseInt($("#masa1").val());
-    masa2 = parseInt($("#masa2").val());
-}
-function crearWorld() {
-    Engine = Matter.Engine,
-            Render = Matter.Render,
-            Runner = Matter.Runner,
-            Events = Matter.Events,
-            Body = Matter.Body,
-            Composite = Matter.Composite,
-            Composites = Matter.Composites,
-            Constraint = Matter.Constraint,
-            MouseConstraint = Matter.MouseConstraint,
-            Mouse = Matter.Mouse,
-            World = Matter.World,
-            Bodies = Matter.Bodies,
-            Vertices = Matter.Vertices;
-    // create an engine
-    engine = Engine.create();
-    // create a renderer
-    render = Render.create({
-        element: document.getElementById("cosas"),
-        engine: engine,
-        options: {
-            width: Math.min(document.documentElement.clientWidth, 480),
-            height: Math.min(document.documentElement.clientHeight, 350),
-            background: 'img/wall-bg.jpg',
-            showAngleIndicator: false,
-            wireframes: false
-        }
-    });
 }
 function hacerCalculos() {
     radian = (angulo * Math.PI) / 180;
@@ -310,4 +298,18 @@ function dibujarWorld() {
     $("#tabla1").find("tbody").append($tabla);
     $("#tabla2").find("tbody").append($tabla2);
     $("#tabla3").find("tbody").append($tabla3);
+    //  Events.on(engine, 'afterUpdate', function(event) {
+//        var time = engine.timing.timestamp;
+//
+//        Composite.translate(cadena, {
+//            x: Math.sin(time * 0.001) * 2,
+//            y: Math.sin(time * 0.001) * 2
+//        });
+//        var scale = 1 + (Math.sin(time * 0.001) * 0.01);
+//
+//        Composite.scale(stack, scale, scale, {
+//            x: 300,
+//            y: 300
+//        });
+//    });
 }
