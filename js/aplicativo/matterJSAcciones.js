@@ -202,7 +202,9 @@ function valueOutput() {
             break;
     }
     verticesFl = Vertices.fromPath('40 40 40 80 80 80 80 40 80 20 80 100 100 60');
-    flechas = Bodies.fromVertices(250, 250, verticesFl, {isStatic: true, friction: 0.01});
+    flechas = Bodies.fromVertices(250, 250, verticesFl, {
+        collisionFilter: {mask: defaultCategory | greenCategory, group: group},
+        isStatic: true, friction: 0.01});
     cadena = Composites.chain(cadena, 0.5, 0, -0.5, 0, {stiffness: 1, length: 5});
     c = ((a ** 2) + (b ** 2)) ** (1 / 2);
     $("#datos").empty();
